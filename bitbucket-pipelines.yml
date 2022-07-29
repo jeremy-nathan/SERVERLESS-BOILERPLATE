@@ -1,0 +1,57 @@
+image:
+  name: 049289484494.dkr.ecr.ap-southeast-1.amazonaws.com/mmt/nodejs-awsv2:14.18.1
+  aws:
+    access-key: $ECR_AWS_ACCESS_KEY_ID
+    secret-key: $ECR_AWS_SECRET_ACCESS_KEY
+
+definitions:
+  script: &awsConfigure |
+    aws configure set aws_access_key_id $SLS_AWS_ACCESS_KEY_ID
+    aws configure set aws_secret_access_key $SLS_AWS_SECRET_ACCESS_KEY
+    aws configure set region $AWS_REGION
+    aws configure set output json
+  steps:
+    - step: &build-env
+        name: Build environment
+        caches:
+          - node
+        script:
+          - yarn
+    - step: &deploy-app
+        name: Serverless deploy
+        caches:
+          - node
+        script:
+          - *awsConfigure
+          - aws secretsmanager get-secret-value --secret-id $ENV_SECRET_ARN --query SecretString --output text | jq -r '."'"$BITBUCKET_REPO_SLUG"'"' > encodedEnv.txt
+          - base64 -d encodedEnv.txt > .env.$BITBUCKET_DEPLOYMENT_ENVIRONMENT
+          - yarn sls-deploy-$BITBUCKET_DEPLOYMENT_ENVIRONMENT
+
+# Workflow Configuration
+pipelines:
+  # default:
+  #   - step:
+  #         <<: *install
+  tags:
+    '*':
+      - step:
+          <<: *build-env
+      - step:
+          <<: *deploy-app
+          deployment: prod
+          trigger: manual
+  branches:
+    master:
+      - step:
+          <<: *build-env
+      - step:
+          <<: *deploy-app
+          deployment: prod
+          trigger: manual
+    develop:
+      - step:
+          <<: *build-env
+      - step:
+          <<: *deploy-app
+          deployment: stg
+          trigger: manual

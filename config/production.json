@@ -1,0 +1,7 @@
+{
+  "env": "production",
+  "isLocal": false,
+  "isDebug": false,
+  "isCloudDb": true,
+  "xRay": true
+}

@@ -1,0 +1,12 @@
+{
+  "service": "",
+  "name": "",
+  "env": "development",
+  "isLocal": true,
+  "isDebug": false,
+  "isCloudDb": false,
+  "xRay": false,
+  "awsRegion": "ap-southeast-1",
+  "jwtSecretKey": "",
+  "timezone": "Asia/Kuala_Lumpur"
+}

@@ -1,0 +1,24 @@
+{
+  "service": "SERVICE_NAME",
+  "name": "APP_PREFIX",
+  "env": "NODE_ENV",
+  "isLocal": {
+    "__name": "IS_LOCAL",
+    "__format": "json"
+  },
+  "isDebug": {
+    "__name": "DEBUG",
+    "__format": "json"
+  },
+  "isCloudDb": {
+    "__name": "IS_CLOUD_DB",
+    "__format": "json"
+  },
+  "xRay": {
+    "__name": "ENABLE_XRAY",
+    "__format": "json"
+  },
+  "awsRegion": "REGION",
+  "jwtSecretKey": "JWT_SECRET",
+  "timezone": "TIMEZONE"
+}

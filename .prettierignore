@@ -1,0 +1,11 @@
+package.json
+package-lock.json
+serverless/
+deploy/
+dist/
+doc/
+seeds/
+node_modules/
+*.md
+config/*
+*.json

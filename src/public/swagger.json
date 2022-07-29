@@ -1,0 +1,53 @@
+{
+	"info": {
+		"title": "MMT Centralized Bank List API",
+		"version": "1.0.0",
+		"description": "MMT Centralized Bank List API Documentation"
+	},
+	"openapi": "3.0.0",
+	"servers": [
+		{
+			"url": "/api"
+		}
+	],
+	"paths": {},
+	"components": {
+		"securitySchemes": {
+			"sigv4": {
+				"type": "apiKey",
+				"name": "Authorization",
+				"in": "header",
+				"x-amazon-apigateway-authtype": "awsSigv4"
+			}
+		},
+		"parameters": {
+			"xAmzDate": {
+				"name": "X-Amz-Date",
+				"in": "header",
+				"description": "UTC ISO Timestamp, example format: 20210525T043145Z",
+				"required": true,
+				"schema": {
+					"type": "string"
+				}
+			},
+			"host": {
+				"name": "Host",
+				"in": "header",
+				"description": "Host for AWS Signature v4",
+				"required": true,
+				"schema": {
+					"type": "string"
+				}
+			},
+			"xAmzContentSha256": {
+				"name": "X-Amz-Content-Sha256",
+				"in": "header",
+				"description": "Payload content in SHA256",
+				"schema": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"tags": []
+}

@@ -1,0 +1,7 @@
+{
+  "env": "staging",
+  "isLocal": false,
+  "isDebug": false,
+  "isCloudDb": true,
+  "xRay": false
+}
